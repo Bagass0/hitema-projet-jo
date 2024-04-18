@@ -1,3 +1,5 @@
+-- Adminer 4.8.1 MySQL 10.4.32-MariaDB dump
+
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
@@ -178,9 +180,13 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `identifiant` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `users` (`id`, `identifiant`, `password`) VALUES
-(1,	'admin',	'admin')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `identifiant` = VALUES(`identifiant`), `password` = VALUES(`password`);
+INSERT INTO `users` (`id`, `identifiant`, `password`, `role`) VALUES
+(1,	'admin',	'admin',	'ADMIN'),
+(2,	'hugo',	'hugo',	'USER')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `identifiant` = VALUES(`identifiant`), `password` = VALUES(`password`), `role` = VALUES(`role`);
+
+-- 2024-04-18 20:29:31
