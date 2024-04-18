@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from './context/AuthContext';
-import { validateLogin } from './form/formConnexion';
 
 const Connexion = () => {
     const [username, setUsername] = useState('');
@@ -18,15 +17,6 @@ const Connexion = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Utilisez Joi pour valider les entrées
-        const { error: validationError } = validateLogin(username, password);
-        if (validationError) {
-            setError(validationError.details[0].message);
-            return; // Stop l'exécution si une erreur de validation est trouvée
-        }
-
-        setError('');
 
         try {
             const response = await fetch('http://localhost:3000/api/login', {

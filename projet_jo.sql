@@ -5,6 +5,31 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+DROP TABLE IF EXISTS `athletes`;
+CREATE TABLE `athletes` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id_epreuve` tinyint(3) unsigned DEFAULT NULL,
+  `country` varchar(3) DEFAULT NULL,
+  `name_athlete` varchar(100) DEFAULT NULL,
+  `medaille` varchar(50) DEFAULT NULL,
+  `best_result` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_epreuve` (`id_epreuve`),
+  CONSTRAINT `athletes_ibfk_1` FOREIGN KEY (`id_epreuve`) REFERENCES `epreuves` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `athletes` (`id`, `id_epreuve`, `country`, `name_athlete`, `medaille`, `best_result`) VALUES
+(1,	7,	'NED',	'Sifan Hassan',	'Or',	'29:55.32'),
+(2,	7,	'BRN',	'Kalkidan Gezaegnhe',	'Argent',	'29:56.18'),
+(3,	7,	'ETH',	'Letesenbet Gidey',	'Bronze',	'29:56.18'),
+(4,	1,	'ITA',	'Lamont Marcell Jacobs',	'Or',	'9.80'),
+(5,	1,	'USA',	'Fred Kerley',	'Argent',	'9.84'),
+(6,	1,	'CAN',	'Andre De Grasse',	'Bronze',	'9.89'),
+(7,	9,	'JAM',	'Hansle Parchment',	'Or',	'13.04'),
+(8,	9,	'USA',	'Grant Holloway',	'Argent',	'13.09'),
+(9,	9,	'JAM',	'Ronald Levy',	'Bronze',	'13.10')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `id_epreuve` = VALUES(`id_epreuve`), `country` = VALUES(`country`), `name_athlete` = VALUES(`name_athlete`), `medaille` = VALUES(`medaille`), `best_result` = VALUES(`best_result`);
+
 DROP TABLE IF EXISTS `epreuves`;
 CREATE TABLE `epreuves` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
@@ -95,8 +120,8 @@ DROP TABLE IF EXISTS `sports`;
 CREATE TABLE `sports` (
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   `name_sport` varchar(100) DEFAULT NULL,
-  `site_olympique` TEXT,
-  `img_sport` TEXT,
+  `site_olympique` text DEFAULT NULL,
+  `img_sport` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -146,31 +171,7 @@ INSERT INTO `sports` (`id`, `name_sport`, `site_olympique`, `img_sport`) VALUES
 (43,	'Escalade sportive',	'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.1977238950967!2d2.2532526754099425!3d48.83536710232787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67a9680284d43%3A0xb48e2cb10a362d5a!2sStade%20Pierre%20de%20Coubertin!5e0!3m2!1sfr!2sfr!4v1709716947346!5m2!1sfr!2sfr\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade',	'https://medias.paris2024.org/uploads/2020/11/1332284020-scaled.jpeg?x-oss-process=image/resize,w_1000,h_1000,m_lfit/format,jpeg'),
 (44,	'Skateboard',	'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.1977238950967!2d2.2532526754099425!3d48.83536710232787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67a9680284d43%3A0xb48e2cb10a362d5a!2sStade%20Pierre%20de%20Coubertin!5e0!3m2!1sfr!2sfr!4v1709716947346!5m2!1sfr!2sfr\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade',	'https://medias.paris2024.org/uploads/2022/05/Jeux-olympiques-de-Tokyo-2020-_-Skateboard-Park-scaled.jpg'),
 (45,	'Surf',	'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.1977238950967!2d2.2532526754099425!3d48.83536710232787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67a9680284d43%3A0xb48e2cb10a362d5a!2sStade%20Pierre%20de%20Coubertin!5e0!3m2!1sfr!2sfr!4v1709716947346!5m2!1sfr!2sfr\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade',	'https://medias.paris2024.org/uploads/2020/11/GettyImages-473651012-scaled-1.jpg?x-oss-process=image/resize,w_2560,h_1244,m_lfit/format,jpeg')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name_sport` = VALUES(`name_sport`);
-
-DROP TABLE IF EXISTS `athletes`;
-CREATE TABLE `athletes` (
-  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  `id_epreuve` tinyint(3) unsigned,
-  `country` VARCHAR(3),
-  `name_athlete` VARCHAR(100),
-  `medaille` VARCHAR(50),
-  `best_result` VARCHAR(100),
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`id_epreuve`) REFERENCES `epreuves`(`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `athletes` (`id`, `id_epreuve`, `country`,`name_athlete`, `medaille`, `best_result`) VALUES
-    (1, 7, 'NED', 'Sifan Hassan', 'Or', '29:55.32'),
-    (2, 7, 'BRN', 'Kalkidan Gezaegnhe', 'Argent', '29:56.18'),
-    (3, 7, 'ETH', 'Letesenbet Gidey', 'Bronze', '29:56.18'),
-    (4, 1, 'ITA', 'Lamont Marcell Jacobs', 'Or', '9.80'),
-    (5, 1, 'USA', 'Fred Kerley', 'Argent', '9.84'),
-    (6, 1, 'CAN', 'Andre De Grasse', 'Bronze', '9.89'),
-    (7, 9, 'JAM', 'Hansle Parchment', 'Or', '13.04'),
-    (8, 9, 'USA', 'Grant Holloway', 'Argent', '13.09'),
-    (9, 9, 'JAM', 'Ronald Levy', 'Bronze', '13.10')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name_athlete` = VALUES(`name_athlete`);
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name_sport` = VALUES(`name_sport`), `site_olympique` = VALUES(`site_olympique`), `img_sport` = VALUES(`img_sport`);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -181,7 +182,5 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `users` (`id`, `identifiant`, `password`) VALUES
-(1,	'admin',	'$2a$12$96NJW0zoD56e1rqQxMIyQO2xw.3Dd26wRiAkPSQEFWrF4nzMu1I.S')
+(1,	'admin',	'admin')
 ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `identifiant` = VALUES(`identifiant`), `password` = VALUES(`password`);
-
--- 2024-03-05 14:48:23

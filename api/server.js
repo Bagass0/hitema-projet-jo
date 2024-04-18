@@ -26,15 +26,9 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const [rows] = await pool.execute('SELECT * FROM users WHERE identifiant = ?', [username]);
+    const [rows] = await pool.execute(`SELECT * FROM users WHERE identifiant = '${username}' AND password = '${password}'`);
 
     if (rows.length === 0) {
-      return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
-    }
-
-    const user = rows[0];
-
-    if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
     }
 
