@@ -17,6 +17,7 @@ import FormEpreuve from './composants/backoffice/FormEpreuve';
 import FormAthlete from './composants/backoffice/FormAthlete';
 import Single from './composants/Single';
 import Podium from './composants/Podium';
+import Commentaires from './composants/Commentaires';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/sites" element={<SitesOlympiques />} />
         <Route path="/login" element={<Connexion />} />
         <Route path="/podium" element={<Podium />} />
+        <Route path="/commentaires" element={<Commentaires />} />
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/sports" element={<AdminSports />} />

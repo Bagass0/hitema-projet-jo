@@ -24,6 +24,7 @@ const Navbar = () => {
                         <Link to="/epreuves" className="hover:text-gray-800 z-50">Epreuves</Link>
                         <Link to="/sites" className="hover:text-gray-800 z-50">Sites Olympiques</Link>
                         <Link to="/podium" className="hover:text-gray-800 z-50">Podium</Link>
+                        <Link to="/commentaires" className="hover:text-gray-800 z-50">Avis</Link>
                     </div>
                 </div>
 
