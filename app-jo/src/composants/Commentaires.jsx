@@ -30,16 +30,23 @@ function Commentaires() {
             onClick={handleSubmitComment}
             className="mt-2 w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
           >
-            Ajouter un commentaire
+            Écrire
           </button>
         </div>
       </div>
       <div className="mt-10 space-y-4">
         {comments.map((comment, index) => (
           // Afficher chaque commentaire sans échapper les caractères spéciaux
-          <div key={index} className="ml-10 w-1/5 bg-gray-500 p-3 text-gray-700" dangerouslySetInnerHTML={{ __html: comment }} />
+          <div key={index} className="ml-3 flex items-start">
+            <img src='./avatar.jpg' alt="Avatar" className="w-12 h-12 rounded-full mr-4" />
+            <div className="w-full bg-gray-100 p-3 rounded-md text-gray-700">
+              <p className="font-semibold">{/* Ajoutez ici le nom de l'auteur du commentaire */}</p>
+              <p className="text-sm" dangerouslySetInnerHTML={{ __html: comment }} />
+            </div>
+          </div>
         ))}
       </div>
+
     </div>
   );
 }
