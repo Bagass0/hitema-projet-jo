@@ -26,9 +26,33 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
+    const [rows] = await pool.execute(`SELECT * FROM users WHERE identifiant = '${username}' AND password = '${password}' `);
+
+    if (rows.length === 0) {
+      return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
+    }
+
+    res.json({ message: 'Authentification réussie' });
+  } catch (error) {
+    console.error('Erreur lors de l\'authentification : ', error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
+
+// Route pour l'authentification
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
     const [rows] = await pool.execute(`SELECT * FROM users WHERE identifiant = '${username}' AND password = '${password}'`);
 
     if (rows.length === 0) {
+      return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
+    }
+
+    const user = rows[0];
+
+    if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
     }
 
