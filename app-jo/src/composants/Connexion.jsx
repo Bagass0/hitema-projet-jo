@@ -27,10 +27,10 @@ const Connexion = () => {
                 body: JSON.stringify({ username, password }),
             });
 
-            const data = await response.json();
+            const role = await response.json();
 
             if (response.ok) {
-                setAuthData(data);
+                setAuthData(role);
                 setError('Authentification réussie. Redirection...');
             } else {
                 setError(data.message || 'Nom d’utilisateur ou mot de passe incorrect.');

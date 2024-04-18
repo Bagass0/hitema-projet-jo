@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 
-const PrivateRoute = () => {
+const PrivateRoute2 = () => {
     const { authData } = useContext(AuthContext);
     console.log(authData);
 
-    if (authData && authData.success === 'USER') {
+    if (authData && authData.success === 'ADMIN') {
         // Si l'utilisateur est authentifié et son rôle est USER, permettre l'accès
         return <Outlet />;
     } else {
@@ -15,4 +15,4 @@ const PrivateRoute = () => {
     }
 };
 
-export default PrivateRoute;
+export default PrivateRoute2;

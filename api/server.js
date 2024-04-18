@@ -32,7 +32,9 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ message: 'Nom d\'utilisateur ou mot de passe incorrect' });
     }
 
-    res.json({ message: 'Authentification réussie' });
+    const { role } = rows[0];
+    console.log(role);
+    res.json({ success: role });
   } catch (error) {
     console.error('Erreur lors de l\'authentification : ', error);
     res.status(500).json({ message: 'Erreur serveur' });
