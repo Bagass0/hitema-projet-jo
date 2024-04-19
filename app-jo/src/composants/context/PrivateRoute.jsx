@@ -6,7 +6,7 @@ const PrivateRoute = () => {
     const { authData } = useContext(AuthContext);
     console.log(authData);
 
-    if (authData && authData.success === 'USER') {
+    if (authData) {
         // Si l'utilisateur est authentifié et son rôle est USER, permettre l'accès
         return <Outlet />;
     } else {

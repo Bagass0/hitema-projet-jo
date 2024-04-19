@@ -8,7 +8,6 @@ import Epreuves from './composants/Epreuves';
 import Connexion from './composants/Connexion';
 import SitesOlympiques from './composants/SitesOlympiques';
 import PrivateRoute from './composants/context/PrivateRoute';
-import PrivateRoute2 from './composants/context/PrivateRoute2';
 import Admin from './composants/backoffice/Admin';
 import AdminSports from './composants/backoffice/Sports';
 import AdminEpreuves from './composants/backoffice/Epreuves';
@@ -30,21 +29,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Connexion />} />
+          <Route path="/sports" element={<Sports />} />
+            <Route path="/sports/:id" element={<Single />} />
+            <Route path="/epreuves" element={<Epreuves />} />
+            <Route path="/sites" element={<SitesOlympiques />} />
+            <Route path="/podium" element={<Podium />} />
+            <Route path="/commentaires" element={<Commentaires />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/sports" element={<Sports />} />
-            <Route path="/sports/:id" element={<Single />} />
-            <Route path="/epreuves" element={<Epreuves />} />
-            <Route path="/sites" element={<SitesOlympiques />} />
-            <Route path="/podium" element={<Podium />} />
-            <Route path="/commentaires" element={<Commentaires />} />
-          </Route>
-          <Route element={<PrivateRoute2 />}>
-            <Route path="/sports" element={<Sports />} />
-            <Route path="/sports/:id" element={<Single />} />
-            <Route path="/epreuves" element={<Epreuves />} />
-            <Route path="/sites" element={<SitesOlympiques />} />
-            <Route path="/podium" element={<Podium />} />
-            <Route path="/commentaires" element={<Commentaires />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/sports" element={<AdminSports />} />
             <Route path="/admin/epreuves" element={<AdminEpreuves />} />
