@@ -55,7 +55,7 @@ const Connexion = () => {
                                 id="username"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 placeholder="Nom d'utilisateur"
-                                required=""
+                                required
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
@@ -68,7 +68,7 @@ const Connexion = () => {
                                 id="password"
                                 placeholder="*****"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required=""
+                                required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
